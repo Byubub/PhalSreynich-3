@@ -1,1 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Phal Sreynich</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff7eb9;
+            --secondary: #ffafcc;
+            --accent: #ff5d8f;
+            --text: #5a3d5c;
+            --background: #fff0f5;
+            --card: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        
+        .hearts-container {
+            position: relative;
+            min-height: 400px;
+            margin: 40px 0;
+        }
+        
+        .floating-name {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            z-index: 2;
+            animation: floatUp 8s linear infinite;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                bottom: -50px;
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            10% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+                transform: scale(1.2);
+            }
+        }
+        
+        .heart-shape {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            opacity: 0.7;
+        }
+        
+        .heart-shape:before,
+        .heart-shape:after {
+            position: absolute;
+            content: "";
+            left: 150px;
+            top: 0;
+            width: 150px;
+            height: 240px;
+            background: var(--accent);
+            border-radius: 150px 150px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart-shape:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        .controls {
+            margin: 30px 0;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(255, 125, 185, 0.4);
+        }
+        
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 93, 143, 0.6);
+        }
+        
+        .message {
+            background-color: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--accent);
+            opacity: 0;
+            animation: floatHearts 10s linear infinite;
+        }
+        
+        @keyframes floatHearts {
+            0% {
+                top: 100%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: -10%;
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .heart-shape {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .heart-shape:before,
+            .heart-shape:after {
+                left: 100px;
+                width: 100px;
+                height: 160px;
+            }
+            
+            .floating-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <header class="header">
+            <h1>For You Phal Sreynich</h1>
+            <p class="subtitle">Nama spesial yang selalu ada di hati</p>
+        </header>
+        
+        <div class="hearts-container" id="heartsContainer">
+            <div class="heart-shape"></div>
+            <!-- Floating names will be added dynamically -->
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="startBtn">Mulai Animasi</button>
+            <button class="btn" id="stopBtn">Hentikan Animasi</button>
+        </div>
+        
+        <div class="message">
+            <p>Setiap kali namamu muncul, hatiku berdebar lebih kencang 💖</p>
+            <p>Semoga kamu suka dengan kejutan kecil ini!</p>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>Dibuat dengan ❤️ khusus untuk Phal Sreynich</p>
+    </footer>
 
+    <script>
+        let animationInterval;
+        
+        // Create background floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const heartSymbols = ['❤️', '💖', '💕', '💘', '💓'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                
+                // Random positioning and animation delay
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+                
+                container.appendChild(heart);
+            }
+        }
+        
+        // Start the name animation
+        function startAnimation() {
+            stopAnimation(); // Ensure no previous animation is running
+            
+            const container = document.getElementById('heartsContainer');
+            animationInterval = setInterval(() => {
+                createFloatingName(container);
+            }, 800);
+        }
+        
+        // Stop the animation
+        function stopAnimation() {
+            if (animationInterval) {
+                clearInterval(animationInterval);
+            }
+        }
+        
+        // Create a floating name element
+        function createFloatingName(container) {
+            const nameElement = document.createElement('div');
+            nameElement.classList.add('floating-name');
+            nameElement.innerText = "Phal Sreynich";
+            
+            // Random horizontal position
+            const leftPos = Math.random() * 70 + 15;
+            nameElement.style.left = leftPos + '%';
+            
+            // Random animation duration between 5-10 seconds
+            const duration = Math.random() * 5 + 8;
+            nameElement.style.animationDuration = duration + 's';
+            
+            // Add to container
+            container.appendChild(nameElement);
+            
+            // Remove element after animation completes
+            setTimeout(() => {
+                if (nameElement.parentNode) {
+                    nameElement.parentNode.removeChild(nameElement);
+                }
+            }, duration * 1000);
+        }
+        
+        // Initialize the page
+        window.onload = function() {
+            createFloatingHearts();
+            
+            // Set up button event listeners
+            document.getElementById('startBtn').addEventListener('click', startAnimation);
+            document.getElementById('stopBtn').addEventListener('click', stopAnimation);
+            
+            // Start animation automatically after a short delay
+            setTimeout(startAnimation, 1000);
+        };
+    </script>
+</body>
+</html>
